@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>223</width>
+    <height>301</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>204</width>
+    <height>265</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Сапёр</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="myimages.qrc">
+    <normaloff>:/MyImages/Images/Minesweeper_Icon.png</normaloff>:/MyImages/Images/Minesweeper_Icon.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QWidget" name="widgetBar" native="true">
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <widget class="QLCDNumber" name="lcdNumberMines">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>64</width>
+         <height>23</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelTime">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>0</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>00:00</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonPlay">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>0</y>
+         <width>21</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="myimages.qrc">
+         <normaloff>:/MyImages/Images/Play-icon.png</normaloff>:/MyImages/Images/Play-icon.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonPause">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>0</y>
+         <width>21</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="myimages.qrc">
+         <normaloff>:/MyImages/Images/Pause.png</normaloff>:/MyImages/Images/Pause.png</iconset>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="Field" name="widgetField" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>200</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>223</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Меню</string>
+    </property>
+    <addaction name="actionNewGame"/>
+    <addaction name="actionNoob"/>
+    <addaction name="actionLover"/>
+    <addaction name="actionProfessional"/>
+    <addaction name="actionRecords"/>
+    <addaction name="actionStatistic"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionNewGame">
+   <property name="text">
+    <string>Новая игра</string>
+   </property>
+  </action>
+  <action name="actionNoob">
+   <property name="text">
+    <string>Новичок</string>
+   </property>
+  </action>
+  <action name="actionLover">
+   <property name="text">
+    <string>Любитель</string>
+   </property>
+  </action>
+  <action name="actionProfessional">
+   <property name="text">
+    <string>Профессионал</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="actionRecords">
+   <property name="text">
+    <string>Таблица рекордов</string>
+   </property>
+  </action>
+  <action name="actionStatistic">
+   <property name="text">
+    <string>Статистика</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Field</class>
+   <extends>QWidget</extends>
+   <header>field.h</header>
+   <container>1</container>
+   <slots>
+    <signal>signalSetFlags(int)</signal>
+    <signal>signalUpdateTime(int)</signal>
+    <signal>signalNoob()</signal>
+    <signal>signalLover()</signal>
+    <signal>signalProfessional()</signal>
+    <slot>slotPlayPause()</slot>
+    <slot>slotNewGame()</slot>
+    <slot>slotNoob()</slot>
+    <slot>slotLover()</slot>
+    <slot>slotProfessional()</slot>
+    <slot>slotCloseWindow()</slot>
+    <slot>slotRecords()</slot>
+    <slot>slotStatistic()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="myimages.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pushButtonPlay</sender>
+   <signal>clicked()</signal>
+   <receiver>widgetField</receiver>
+   <slot>slotNewGame()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>109</x>
+     <y>52</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>118</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widgetField</sender>
+   <signal>signalSetFlags(int)</signal>
+   <receiver>lcdNumberMines</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>108</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>40</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widgetField</sender>
+   <signal>signalUpdateTime(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slotUpdateTime(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>108</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>101</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonPause</sender>
+   <signal>clicked()</signal>
+   <receiver>widgetField</receiver>
+   <slot>slotPlayPause()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>52</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>108</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNewGame</sender>
+   <signal>triggered()</signal>
+   <receiver>widgetField</receiver>
+   <slot>slotNewGame()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>108</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionLover</sender>
+   <signal>triggered()</signal>
+   <receiver>widgetField</receiver>
+   <slot>slotLover()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>108</x>
+     <y>165</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNoob</sender>
+   <signal>triggered()</signal>
+   <receiver>widgetField</receiver>
+   <slot>slotNoob()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>108</x>
+     <y>165</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionProfessional</sender>
+   <signal>triggered()</signal>
+   <receiver>widgetField</receiver>
+   <slot>slotProfessional()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>108</x>
+     <y>165</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widgetField</sender>
+   <signal>signalNoob()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slotResizeNoob()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>280</x>
+     <y>423</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>280</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MainWindow</sender>
+   <signal>signalCloseW()</signal>
+   <receiver>widgetField</receiver>
+   <slot>slotCloseWindow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>111</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widgetField</sender>
+   <signal>signalLover()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slotResizeLover()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>111</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widgetField</sender>
+   <signal>signalProfessional()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slotResizeProfessional()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>111</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>111</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionRecords</sender>
+   <signal>triggered()</signal>
+   <receiver>widgetField</receiver>
+   <slot>slotRecords()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>111</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionStatistic</sender>
+   <signal>triggered()</signal>
+   <receiver>widgetField</receiver>
+   <slot>slotStatistic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>111</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <signal>signalCloseW()</signal>
+  <slot>slotUpdateTime(int)</slot>
+  <slot>slotResizeNoob()</slot>
+  <slot>slotResizeLover()</slot>
+  <slot>slotResizeProfessional()</slot>
+ </slots>
+</ui>

@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/MyImages">
+        <file>Images/clanbomber.png</file>
+        <file>Images/flag.png</file>
+        <file>Images/Minesweeper_Icon.png</file>
+        <file>Images/BoxBlue.png</file>
+        <file>Images/Play-icon.png</file>
+        <file>Images/Pause.png</file>
+        <file>Images/boom.jpg</file>
+        <file>Images/2-8.png</file>
+        <file>Images/3-5.png</file>
+        <file>Images/4-26.png</file>
+        <file>Images/7-29.gif</file>
+        <file>Images/five19.png</file>
+        <file>Images/number8-10.jpg</file>
+        <file>Images/six25.jpg</file>
+        <file>Images/BoxGrey.png</file>
+        <file>Images/1-8.png</file>
+        <file>Images/number2-4.png</file>
+        <file>Images/flag3.png</file>
+        <file>Images/4-4.png</file>
+        <file>Images/6-4.png</file>
+    </qresource>
+</RCC>
