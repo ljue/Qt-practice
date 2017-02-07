@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/MyImages">
+        <file>Images/Ellipse.png</file>
+        <file>Images/Rect.png</file>
+        <file>Images/IconRect.ico</file>
+        <file>Images/IconEllipse.ico</file>
+        <file>Images/iconExit.ico</file>
+        <file>Images/changecolor.png</file>
+        <file>Images/settings-256.png</file>
+        <file>Images/clearicon.png</file>
+        <file>Images/saveicon.png</file>
+        <file>Images/open.png</file>
+        <file>Images/openicon.png</file>
+        <file>Images/databaseicon.png</file>
+    </qresource>
+</RCC>

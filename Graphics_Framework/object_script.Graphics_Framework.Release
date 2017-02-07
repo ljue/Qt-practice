@@ -1,0 +1,17 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\myscene.o
+./release\dialog.o
+./release\pattern.o
+./release\myrect.o
+./release\mymodel.o
+./release\mydelegate.o
+./release\qrc_myimages.o
+./release\moc_mainwindow.o
+./release\moc_myscene.o
+./release\moc_dialog.o
+./release\moc_pattern.o
+./release\moc_mymodel.o
+./release\moc_mydelegate.o
+);
