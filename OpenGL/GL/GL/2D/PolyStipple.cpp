@@ -1,0 +1,164 @@
+// GL.cpp: определяет точку входа для консольного приложения.
+//
+
+#include "stdafx.h"
+
+#define Line(x1, y1, x2, y2) \
+glBegin(GL_LINES);  \
+glVertex2f((x1), (y1)); \
+glVertex2f((x2), (y2)); \
+glEnd();
+
+
+float gx = 0.35f, gy = 0.58f, gw, gh;
+
+GLubyte Spade[] = 	// Узор – пики
+{
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x1f, 0xff, 0xff, 0xf8, 0x1f, 0x00, 0x00, 0xf8,
+	0x01, 0xc0, 0x03, 0x80, 0x00, 0x70, 0x0e, 0x00,
+	0x00, 0x20, 0x04, 0x00, 0x00, 0x30, 0x0c, 0x00,
+	0x00, 0x10, 0x08, 0x00, 0x00, 0x18, 0x18, 0x00,
+	0x07, 0xc4, 0x23, 0xe0, 0x0f, 0xf8, 0x1f, 0xf0,
+	0x38, 0x1c, 0x38, 0x1c, 0x30, 0x00, 0x00, 0x0c,
+	0x60, 0x00, 0x00, 0x06, 0x60, 0x00, 0x00, 0x06,
+	0x60, 0x00, 0x00, 0x06, 0x60, 0x00, 0x00, 0x06,
+	0x60, 0x00, 0x00, 0x06, 0x30, 0x00, 0x00, 0x0c,
+	0x30, 0x00, 0x00, 0x0c, 0x18, 0x00, 0x00, 0x18,
+	0x0e, 0x00, 0x00, 0x70, 0x03, 0x00, 0x00, 0xc0,
+	0x00, 0xc0, 0x03, 0x00, 0x00, 0x70, 0x0e, 0x00,
+	0x00, 0x18, 0x18, 0x00, 0x00, 0x0c, 0x30, 0x00,
+	0x00, 0x07, 0xe0, 0x00, 0x00, 0x03, 0xc0, 0x00,
+	0x00, 0x01, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+
+GLubyte Strip[] = // Другой узор — «в полоску»
+{
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+	0x66, 0x66, 0x66, 0x66, 0x33, 0x33, 0x33, 0x33,
+};
+
+
+void OnPaint()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	glColor3f(0.3f, 0.3f, 1);
+	// Рисуем сначала rectangle без узора. Rect – это тоже полигон, но его не надо помещать в блок glBegin-glEnd
+	glRectd(.02, .5, .172, .1);
+	glFlush();						// Просим изобразить
+	Sleep(1000);						// Ждем 1 секунду
+
+	glColor3ub(255, 0, 0);				// Меняем цвет на красный
+	glEnable(GL_POLYGON_STIPPLE);	// Включаем штриховку
+	glPolygonStipple(Strip);		// Задаемузор
+	glRectd(.2, .5, .37, .1);
+	glFlush();
+	Sleep(1000);
+
+	glColor3f(0, 0, 0);					// Меняем цвет на черный
+	glPolygonStipple(Spade);		// Меняем узор
+	glRectd(.4, .5, .57, .1);
+	glFlush();
+	Sleep(1000);
+
+	glPolygonStipple(Strip);		// Меняем узор
+	glColor3f(0, 0.6f, 0.3f);
+	glRectd(.6, .5, .77, .1);
+	glFlush();
+	Sleep(1000);
+
+	//====== Готовимся заполнить более сложный, невыпуклый (nonconvex) полигон
+	glPolygonStipple(Spade);
+	glColor3d(.6, 0, .3);
+	//==== 6 вершин по 2 координаты
+	float c[6][2] = { .89f, .3f , .8f, .5f, .8f, .2f, .89f, .1f, .98f, .2f, .98f, .5f};
+
+	// Вогнутый  полигон задан для того, чтобы увидеть как плохо обходится с ним OpenGL
+	glBegin(GL_POLYGON);
+	for (int i = 0; i<6; i++)
+		glVertex2fv(c[i]);
+	glEnd();
+
+	glDisable(GL_POLYGON_STIPPLE);
+	glFlush();
+}
+
+//void OnPaint()
+//{
+//	glClear(GL_COLOR_BUFFER_BIT);
+//	glColor3f(1, 0, 0);
+//
+//	float c[6][2] = { 0.2, 0.55, 0.2, 0.25, 0.5, 0.05, 0.8, 0.25, 0.8, 0.55, 0.5, 0.4 };
+//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+//	glBegin(GL_QUADS);
+//	glVertex2fv(c[5]);		glVertex2fv(c[0]);
+//	glVertex2fv(c[1]);		glVertex2fv(c[2]);
+//	glVertex2fv(c[5]);		glVertex2fv(c[4]);
+//	glVertex2fv(c[3]);		glVertex2fv(c[2]);
+//	glEnd();
+//	glFlush();
+//}
+
+
+
+void OnSize(int w, int h)	// Реакция на WM_SIZE
+{
+	glViewport(0, 0, w, h);// Задаем видовой порт окна (вся клиентская область)
+	glMatrixMode(GL_PROJECTION); //определяет в качестве текущей матрицу проецирования
+	glLoadIdentity();//загружает в нее матрицу с единицами на диагонали
+	gluOrtho2D(0, 1, 0, 0.5);	// Режим ортографической проекции
+
+		
+	gw = w;
+	gh = h;
+	glScissor((int)(gx * w), (int)(gy * h), (int)(0.3f * w), (int)(0.3f * h));
+
+}
+void Init()	// Настройки
+{
+	glClearColor(1, 1, 1, 0);	// Цвет фона - белый
+	glShadeModel(GL_FLAT);		// Нет интерполяции цветов при растеризации
+	glPointSize(10);					// Задаем размер точки
+	glEnable(GL_POINT_SMOOTH);		// Задаем «мягкий» контур для точки
+}
+void OnSpecialKey(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_LEFT: gx -= 0.005f; break;
+	case GLUT_KEY_RIGHT: gx += 0.005f; break;
+	case GLUT_KEY_DOWN: gy -= 0.005f; break;
+	case GLUT_KEY_UP:  gy += 0.005f; break;
+	}
+	glScissor((int)(gx * gw), (int)(gy * gh), (int)(0.3f * gw), (int)(0.3f * gh));
+	glutPostRedisplay();
+}
+
+void main()
+{
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(500, 500);
+	glutCreateWindow("");
+	Init();
+	glutSpecialFunc(OnSpecialKey);
+	glutReshapeFunc(OnSize);
+	glutDisplayFunc(OnPaint);
+	glutMainLoop();
+	//===Здесь нельзя размещать код, так как предыдущий оператор является псевдо бесконечным циклом выборки сообщений о событиях
+}
+
+
